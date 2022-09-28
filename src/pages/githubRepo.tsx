@@ -22,7 +22,6 @@ function GithubRepo() {
     {
       onError: (error) => {
         console.log("fetch was not successful", error);
-        alert("there on user with that name");
       },
       enabled: !!query,
     }
@@ -78,8 +77,8 @@ function GithubRepo() {
         <div className="flex h-[500px] items-center justify-center">
           <Dna
             visible={true}
-            height="80"
-            width="80"
+            height="90"
+            width="90"
             ariaLabel="dna-loading"
             wrapperStyle={{}}
             wrapperClass="dna-wrapper"
