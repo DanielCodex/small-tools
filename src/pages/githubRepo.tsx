@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Container from "../components/Container";
 import Card from "../components/githubRepo/Card";
 import urlPretty from "../utils/urlPretty";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, ReactNode, useState } from "react";
 import { Dna } from "react-loader-spinner";
 
 function GithubRepo() {
@@ -67,7 +67,7 @@ function GithubRepo() {
           />
         </div>
       ) : repoQuery.isError ? (
-        <span>Error: {repoQuery.error as JSX.Element}</span>
+        <span>Error</span>
       ) : repoQuery.isLoading && !repoQuery.isFetching ? (
         <div className="flex h-[500px] flex-col items-center justify-center gap-5">
           <span className="text-9xl">☝️</span>
