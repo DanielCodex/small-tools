@@ -29,6 +29,7 @@ function GithubRepo() {
         console.log("fetch was not successful", error);
       },
       enabled: !!query,
+      refetchOnWindowFocus: false
     }
   );
   const submitQuery = (event: React.SyntheticEvent) => {
