@@ -15,15 +15,16 @@ function GithubRepo() {
     async () => {
       // just for getting loading status
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      let response = await fetch(`https://api.github.com/users/${query}`);
+      let response = await fetch(`/api/githubUser?user=${query}`);
       let data = await response.json();
       return data;
     },
     {
       onError: (error) => {
         console.log("fetch was not successful", error);
-        alert("there on user with that name")
+        alert("there on user with that name");
       },
+      enabled: !!query,
     }
   );
   const submitQuery = (event: React.SyntheticEvent) => {
@@ -34,11 +35,6 @@ function GithubRepo() {
   const handleData = (event: ChangeEvent<HTMLInputElement>) => {
     setUser(event.target.value);
   };
-
-  if (repoQuery.isError) {
-    console.log("we are not here");
-    return <span>Error:{repoQuery.error as JSX.Element}</span>;
-  }
 
   return (
     <Container tw="flex flex-col gap-5">
@@ -60,21 +56,7 @@ function GithubRepo() {
         </button>
       </form>
 
-
-      {/* Card */}
-      {repoQuery.isLoading ?  (
-        <div className="flex h-[500px] flex-col items-center justify-center">
-          <Dna
-            height="100"
-            width="100"
-            ariaLabel="hearts-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-          <span className="text-2xl ">Waiting for query</span>
-        </div>
-      ) : (
+      {repoQuery.data ? (
         <div className="flex h-[500px] flex-col justify-center">
           <Card
             avatar={repoQuery.data?.avatar_url}
@@ -83,6 +65,24 @@ function GithubRepo() {
             followers={repoQuery.data?.followers}
             following={repoQuery.data?.following}
             twitter_username={repoQuery.data?.twitter_username}
+          />
+        </div>
+      ) : repoQuery.isError ? (
+        <span>Error: {repoQuery.error as JSX.Element}</span>
+      ) : repoQuery.isLoading && !repoQuery.isFetching ? (
+        <div className="flex h-[500px] flex-col items-center justify-center gap-5">
+          <span className="text-9xl">☝️</span>
+          <span className="text-4xl capitalize">Search for user</span>
+        </div>
+      ) : (
+        <div className="flex h-[500px] items-center justify-center">
+          <Dna
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
           />
         </div>
       )}
