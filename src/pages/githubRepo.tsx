@@ -3,41 +3,40 @@ import { useQuery } from "@tanstack/react-query";
 import Container from "../components/Container";
 import Card from "../components/githubRepo/Card";
 import urlPretty from "../utils/urlPretty";
-import HeartLoading from "../components/HeartLoading";
 import { ChangeEvent, useState } from "react";
+import { Dna } from "react-loader-spinner";
 
 function GithubRepo() {
-  const [data, setData] = useState("");
+  const [user, setUser] = useState("");
   const [query, setQuery] = useState("");
-  const repoQuery = useQuery(["repo"], async () => {
-    // just for getting loading status
-    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    let response = await fetch("https://api.github.com/users/danielcodex");
-    let data = await response.json();
-    return data;
-  });
+  const repoQuery = useQuery(
+    ["repo", query],
+    async () => {
+      // just for getting loading status
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      let response = await fetch(`https://api.github.com/users/${query}`);
 
+      let data = await response.json();
+      return data;
+    },
+    {
+      onError: (error) => {
+        console.log("fetch was not successful", error);
+      },
+    }
+  );
   const submitQuery = (event: React.SyntheticEvent) => {
-    setQuery(data);
-    console.log(query);
     event.preventDefault();
+    setQuery(user);
   };
 
   const handleData = (event: ChangeEvent<HTMLInputElement>) => {
-    setData(event.target.value);
-    console.log(data);
+    setUser(event.target.value);
   };
 
-  if (repoQuery.isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <HeartLoading />
-      </div>
-    );
-  }
-
   if (repoQuery.isError) {
+    console.log("we are not here");
     return <span>Error:{repoQuery.error as JSX.Element}</span>;
   }
 
@@ -50,9 +49,10 @@ function GithubRepo() {
       <form className="flex justify-center" onSubmit={submitQuery}>
         <input
           type="text"
+          name="repo"
           placeholder="Search For User ..."
           className="input input-bordered input-primary w-full max-w-md"
-          value={data}
+          value={user}
           onChange={handleData}
         />
         <button className="btn btn-outline btn-primary ml-2" type="submit">
@@ -61,16 +61,29 @@ function GithubRepo() {
       </form>
 
       {/* Card */}
-      <div className="flex h-[500px] flex-col justify-center">
-        <Card
-          avatar={repoQuery.data?.avatar_url}
-          login={repoQuery.data?.login}
-          blog={urlPretty(repoQuery.data?.blog)}
-          followers={repoQuery.data?.followers}
-          following={repoQuery.data?.following}
-          twitter_username={repoQuery.data?.twitter_username}
-        />
-      </div>
+      {repoQuery.isLoading ? (
+        <div className="flex h-[500px] items-center justify-center">
+          <Dna
+            height="80"
+            width="80"
+            ariaLabel="hearts-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      ) : (
+        <div className="flex h-[500px] flex-col justify-center">
+          <Card
+            avatar={repoQuery.data?.avatar_url}
+            login={repoQuery.data?.login}
+            blog={urlPretty(repoQuery.data?.blog)}
+            followers={repoQuery.data?.followers}
+            following={repoQuery.data?.following}
+            twitter_username={repoQuery.data?.twitter_username}
+          />
+        </div>
+      )}
     </Container>
   );
 }
