@@ -15,7 +15,12 @@ function GithubRepo() {
     async () => {
       // just for getting loading status
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      let response = await fetch(`/api/githubUser?user=${query}`);
+      let response = await fetch(`/api/githubUser?user=${query}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      });
       let data = await response.json();
       return data;
     },
