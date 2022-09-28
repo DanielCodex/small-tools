@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Container from "../components/Container";
 import Card from "../components/githubRepo/Card";
 import urlPretty from "../utils/urlPretty";
-import { ChangeEvent, ReactNode, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Dna } from "react-loader-spinner";
 
 function GithubRepo() {
