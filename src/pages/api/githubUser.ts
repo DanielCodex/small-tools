@@ -11,6 +11,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         Authorization: `Bearer ${github_token}`,
       },
     });
+
+    if (!response.ok) {
+      res.status(400).json({status: response.status})
+    }
     let data = await response.json();
     res.status(200).json(data);
   }
