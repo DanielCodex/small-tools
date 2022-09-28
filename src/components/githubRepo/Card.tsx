@@ -19,8 +19,9 @@ function Card({
   return (
     <>
       {!login ? (
-        <div className="flex justify-center">
-          <span className="text-9xl">🥺</span>
+        <div className="flex justify-center flex-col items-center gap-5">
+          <span className="text-9xl">🤔</span>
+          <span className="text-2xl">Nobody with That Name</span>
         </div>
       ) : (
         <div className="card card-side border-r-2 border-orange-400/30 bg-base-200 shadow-xl">
