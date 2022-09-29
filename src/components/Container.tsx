@@ -6,7 +6,7 @@ interface Props {
 }
 
 function container({ children, tw }: Props) {
-  return <div className={`container max-w-4xl mx-auto mt-5 ${tw}`}>{children}</div>;
+  return <div className={`container max-w-4xl mx-auto ${tw}`}>{children}</div>;
 }
 
 export default container;
