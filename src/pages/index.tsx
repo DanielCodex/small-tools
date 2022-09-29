@@ -14,6 +14,11 @@ const Home: NextPage = () => {
             1. github repo
           </a>
         </Link>
+        <Link href={"/chmod"}>
+          <a className="link link-primary text-xl capitalize decoration-orange-400/30 underline-offset-2">
+            2. chmod
+          </a>
+        </Link>
       </div>
     </Container>
   );
