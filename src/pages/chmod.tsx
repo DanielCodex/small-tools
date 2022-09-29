@@ -6,25 +6,35 @@ import {
   Permissions,
   sumGroup,
   sumOther,
+  modeCalculator,
 } from "../utils/permissions";
 
 function Chmod() {
   const [owner, setOwner] = useState<Permissions>({
-    read: "",
-    write: "",
-    execute: "",
+    octalRead: "",
+    octalWrite: "",
+    octalExecute: "",
+    modeRread: "",
+    modeWrite: "",
+    modeExecute: "",
   });
 
   const [group, setGroup] = useState<Permissions>({
-    read: "",
-    write: "",
-    execute: "",
+    octalRead: "",
+    octalWrite: "",
+    octalExecute: "",
+    modeRread: "",
+    modeWrite: "",
+    modeExecute: "",
   });
 
   const [other, setOther] = useState<Permissions>({
-    read: "",
-    write: "",
-    execute: "",
+    octalRead: "",
+    octalWrite: "",
+    octalExecute: "",
+    modeRread: "",
+    modeWrite: "",
+    modeExecute: "",
   });
 
   return (
@@ -34,14 +44,16 @@ function Chmod() {
       </Head>
       <div className="flex h-screen flex-col justify-center gap-10">
         <div className="flex justify-around">
-          <div className="border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
+          <div className="rounded-lg border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
             <h1 className="mb-2 text-center text-4xl">
               {sumOwner(owner) + sumGroup(group) + sumOther(other)}
             </h1>
             <p className="text-2xl">Octal</p>
           </div>
-          <div className="border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
-            <h1 className="mb-2 text-center text-4xl">---------</h1>
+          <div className="rounded-lg border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
+            <h1 className="mb-2 text-center text-4xl">
+              {modeCalculator(owner, group, other)}
+            </h1>
             <p className="text-center text-2xl">Mode</p>
           </div>
         </div>
@@ -60,10 +72,11 @@ function Chmod() {
                     if (e.target.checked) {
                       setOwner({
                         ...owner,
-                        read: e.target.value,
+                        octalRead: e.target.value,
+                        modeRread: "r",
                       });
                     } else {
-                      setOwner({ ...owner, read: "" });
+                      setOwner({ ...owner, octalRead: "", modeRread: "" });
                     }
                   }}
                 />
@@ -80,12 +93,11 @@ function Chmod() {
                     if (e.target.checked) {
                       setOwner({
                         ...owner,
-                        write: e.target.value,
+                        octalWrite: e.target.value,
                       });
                     } else {
-                      setOwner({ ...owner, write: "" });
+                      setOwner({ ...owner, octalWrite: "" });
                     }
-                    console.log(owner.write);
                   }}
                 />
               </label>
@@ -99,9 +111,9 @@ function Chmod() {
                   value="100"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setOwner({ ...owner, execute: e.target.value });
+                      setOwner({ ...owner, octalExecute: e.target.value });
                     } else {
-                      setOwner({ ...owner, execute: "" });
+                      setOwner({ ...owner, octalExecute: "" });
                     }
                   }}
                 />
@@ -121,9 +133,9 @@ function Chmod() {
                   value="40"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setGroup({ ...group, read: e.target.value });
+                      setGroup({ ...group, octalRead: e.target.value });
                     } else {
-                      setGroup({ ...group, read: "" });
+                      setGroup({ ...group, octalRead: "" });
                     }
                   }}
                 />
@@ -138,9 +150,9 @@ function Chmod() {
                   value="20"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setGroup({ ...group, write: e.target.value });
+                      setGroup({ ...group, octalWrite: e.target.value });
                     } else {
-                      setGroup({ ...group, write: "" });
+                      setGroup({ ...group, octalWrite: "" });
                     }
                   }}
                 />
@@ -155,9 +167,9 @@ function Chmod() {
                   value="10"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setGroup({ ...group, execute: e.target.value });
+                      setGroup({ ...group, octalExecute: e.target.value });
                     } else {
-                      setGroup({ ...group, execute: "" });
+                      setGroup({ ...group, octalExecute: "" });
                     }
                   }}
                 />
@@ -177,9 +189,9 @@ function Chmod() {
                   value="4"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setOther({ ...other, read: e.target.value });
+                      setOther({ ...other, octalRead: e.target.value });
                     } else {
-                      setOther({ ...other, read: "" });
+                      setOther({ ...other, octalRead: "" });
                     }
                   }}
                 />
@@ -194,9 +206,9 @@ function Chmod() {
                   value="2"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setOther({ ...other, write: e.target.value });
+                      setOther({ ...other, octalWrite: e.target.value });
                     } else {
-                      setOther({ ...other, write: "" });
+                      setOther({ ...other, octalWrite: "" });
                     }
                   }}
                 />
@@ -211,9 +223,9 @@ function Chmod() {
                   value="1"
                   onChange={(e) => {
                     if (e.target.checked) {
-                      setOther({ ...other, execute: e.target.value });
+                      setOther({ ...other, octalExecute: e.target.value });
                     } else {
-                      setOther({ ...other, execute: "" });
+                      setOther({ ...other, octalExecute: "" });
                     }
                   }}
                 />
