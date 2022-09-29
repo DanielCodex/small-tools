@@ -43,6 +43,7 @@ function Chmod() {
         <title>chmod</title>
       </Head>
       <div className="flex h-screen flex-col justify-center gap-10">
+        <h1 className="text-center text-5xl capitalize text-green-400">Chmod calculator 😎</h1>
         <div className="flex justify-around">
           <div className="rounded-lg border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
             <h1 className="mb-2 text-center text-4xl">
