@@ -6,6 +6,7 @@ export interface Permissions {
   modeRread: string;
   modeWrite: string;
   modeExecute: string;
+
 }
 
 export const sumOwner = (owner: Permissions) =>

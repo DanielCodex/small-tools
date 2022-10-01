@@ -43,21 +43,25 @@ function Chmod() {
         <title>chmod</title>
       </Head>
       <div className="flex h-screen flex-col justify-center gap-10">
-        <h1 className="text-center text-5xl capitalize text-green-400">Chmod calculator 😎</h1>
+        <h1 className="text-center text-5xl capitalize text-green-400">
+          Chmod calculator 😎
+        </h1>
+
         <div className="flex justify-around">
-          <div className="rounded-lg border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
+          <div className="border-2 border-green-400/30 px-8 py-4 rounded-md shadow-lg bg-base-200">
             <h1 className="mb-2 text-center text-4xl">
               {sumOwner(owner) + sumGroup(group) + sumOther(other)}
             </h1>
-            <p className="text-2xl">Octal</p>
+            <p className="text-2xl text-center">Octal</p>
           </div>
-          <div className="rounded-lg border-2 border-green-400/30 bg-base-200 px-8 py-4 shadow-lg">
+          <div className="border-2 border-green-400/30 px-8 py-4 rounded-md bg-base-200">
             <h1 className="mb-2 text-center text-4xl">
               {modeCalculator(owner, group, other)}
             </h1>
-            <p className="text-center text-2xl">Mode</p>
+            <p className="text-2xl text-center">Mode</p>
           </div>
         </div>
+
         <div className="grid grid-cols-3 gap-5 rounded-lg border-r-2 border-l-2 border-green-400/30 bg-base-200 px-7 py-2 shadow-lg">
           {/* owner */}
           <div>
@@ -74,7 +78,6 @@ function Chmod() {
                       setOwner({
                         ...owner,
                         octalRead: e.target.value,
-                        modeRread: "r",
                       });
                     } else {
                       setOwner({ ...owner, octalRead: "", modeRread: "" });
