@@ -21,7 +21,7 @@ const Home: NextPage = () => {
         </Link>
         <Link href={"/httpHeaders"}>
           <a className="link link-primary text-xl capitalize decoration-orange-400/30 underline-offset-2">
-            2. http headers
+            3. http headers
           </a>
         </Link>
       </div>
