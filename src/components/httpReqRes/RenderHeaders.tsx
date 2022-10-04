@@ -11,7 +11,7 @@ function RenderHeaders({ siteQuery }: any) {
         <ul>
           {Object.entries(siteQuery.data.request).map(([key, value], index) => {
             return (
-              <li className="font-mono" key={index}>
+              <li className="font-mono max-w-sm" key={index}>
                 <span className="text-green-400">{key}: </span>
                 <span className="text-indigo-300">{value}</span>
               </li>
@@ -27,7 +27,7 @@ function RenderHeaders({ siteQuery }: any) {
           {Object.entries(siteQuery.data.response).map(
             ([key, value], index) => {
               return (
-                <li className="font-mono" key={index}>
+                <li className="font-mono max-w-sm" key={index}>
                   <span className="text-green-400">{key}: </span>
                   <span className="text-indigo-300">{value}</span>
                 </li>
