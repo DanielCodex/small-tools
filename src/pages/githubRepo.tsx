@@ -18,7 +18,7 @@ function GithubRepo() {
       let response = await fetch(`/api/githubUser?user=${query}`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       });
       let data = await response.json();
@@ -29,7 +29,7 @@ function GithubRepo() {
         console.log("fetch was not successful", error);
       },
       enabled: !!query,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
     }
   );
   const submitQuery = (event: React.SyntheticEvent) => {
@@ -81,6 +81,7 @@ function GithubRepo() {
         </div>
       ) : (
         <div className="flex h-[500px] items-center justify-center">
+          {repoQuery.status}
           <Dna
             visible={true}
             height="90"
