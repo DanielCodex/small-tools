@@ -8,7 +8,7 @@ function RenderHeaders({ siteQuery }: any) {
       <div>
         <h2 className="capitalize">req headers</h2>
         <hr className="mt-2 mb-4 opacity-75" />
-        <ul>
+        <ul className="overflow-x-auto">
           {Object.entries(siteQuery.data.request).map(([key, value], index) => {
             return (
               <li className="font-mono max-w-sm" key={index}>
@@ -23,7 +23,7 @@ function RenderHeaders({ siteQuery }: any) {
       <div>
         <h2 className="capitalize">res Headers</h2>
         <hr className="mt-2 mb-4 opacity-75" />
-        <ul>
+        <ul className="overflow-x-auto">
           {Object.entries(siteQuery.data.response).map(
             ([key, value], index) => {
               return (
