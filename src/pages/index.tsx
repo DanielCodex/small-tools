@@ -19,6 +19,11 @@ const Home: NextPage = () => {
             2. chmod
           </a>
         </Link>
+        <Link href={"/httpHeaders"}>
+          <a className="link link-primary text-xl capitalize decoration-orange-400/30 underline-offset-2">
+            2. http headers
+          </a>
+        </Link>
       </div>
     </Container>
   );
