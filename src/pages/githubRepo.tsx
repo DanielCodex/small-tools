@@ -81,7 +81,7 @@ function GithubRepo() {
         </div>
       ) : (
         <div className="flex h-[500px] items-center justify-center">
-          {repoQuery.status}
+          {/* {repoQuery.status} */}
           <Dna
             visible={true}
             height="90"
